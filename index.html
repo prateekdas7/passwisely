@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassWisely</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9ecef;
+            color: #343a40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            color: #007bff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #495057;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .strength {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .weak {
+            color: #dc3545;
+        }
+
+        .medium {
+            color: #ffc107;
+        }
+
+        .strong {
+            color: #28a745;
+        }
+
+        #passwordInput, #nameInput, #dobInput, #petNameInput, #specificPasswordInput {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        #passwordInput:focus, #nameInput:focus, #dobInput:focus, #petNameInput:focus, #specificPasswordInput:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        #checkStrength, #checkSpecificInfo {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #checkStrength:hover, #checkSpecificInfo:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .tips {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .tips:hover {
+            transform: scale(1.02);
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center; /* Center the buttons */
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            margin: 0 5px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #007b ff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .active {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<img src="BNAC Tech.jpg" alt="BNAC Logo" style="width: 150px; margin-top: 20px;">
+    <h1>PassWisely</h1>
+    <div class="tab-container">
+        <div class="tab active" id="strengthTab">Password Strength</div>
+        <div class="tab" id="customStrengthTab">Custom Strength Check</div>
+    </div>
+    <div class="container" id="strengthContainer">
+        <h2>Check Password Strength</h2>
+        <input type="password" id="passwordInput" placeholder="Enter your password" />
+        <button id="checkStrength">Check Strength</button>
+        <div id="strengthOutput" class="strength hidden"></div>
+    </div>
+    <div class="container hidden" id="customStrengthContainer">
+        <h2>Custom Password Strength Check</h2>
+        <input type="text" id="nameInput" placeholder="Enter your name" />
+        <input type="text" id="dobInput" placeholder="Enter your date of birth" />
+        <input type="text" id="petNameInput" placeholder="Enter your pet name" />
+        <input type="password" id="specificPasswordInput" placeholder="Enter your password" />
+        <button id="checkSpecificInfo">Check Specific Info</button>
+        <div id="specificInfoOutput" class="strength hidden"></div>
+    </div>
+    <div class="tips">
+        <h3>Tips for a Strong Password</h3>
+        <ul>
+            <li>Use at least 12 characters.</li>
+            <li>Include a mix of letters, numbers, and symbols.</li>
+            <li>Avoid using easily guessable information like your name or birthdate.</li>
+            <li>Consider using a passphrase for better security.</li>
+        </ul>
+    </div>
+<div class="footer">
+        <p><b><center>The project is developed under the Community Service Initiative of BNAC Tech Solutions Private Limited, a Startup based out of India.</center></b></p>
+        <p class="disclaimer"><center>Disclaimer - the strength of the password is checked based on our algorithm, there is no warranty or guarantee and we will not be held responsible or liable for any loss or damage.</center></p>
+    </div>
+    <script>
+        function checkPasswordStrength(password) {
+	let strength = 0;
+        if (password.length >= 12) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[\W_]/.test(password)) strength++;
+
+        if(strength==0||strength==1) return 'Low';
+	if(strength==2||strength==3) return 'Medium';
+	if(strength==4||strength==5) return 'High';
+        }
+
+        function checkCustomPasswordStrength(name, dob, petName, password) {
+            let containsPersonalInfo = false;
+            if (password.includes(name) || password.includes(dob) || password.includes(petName)) {
+                containsPersonalInfo = true;
+            }
+            return containsPersonalInfo;
+        }
+
+        document.getElementById('checkStrength').addEventListener('click', function() {
+            const password = document.getElementById('passwordInput').value;
+            const strength = checkPasswordStrength(password);
+            const strengthOutput = document.getElementById('strengthOutput');
+            strengthOutput.classList.remove('hidden');
+            strengthOutput.textContent = `Password strength is: ${strength}`;
+            strengthOutput.className = `strength ${strength}`;
+        });
+
+        document.getElementById('checkSpecificInfo').addEventListener('click', function() {
+            const name = document.getElementById('nameInput').value;
+            const dob = document.getElementById('dobInput').value;
+            const petName = document.getElementById('petNameInput').value;
+            const password = document.getElementById('specificPasswordInput').value;
+            const containsPersonalInfo = checkCustomPasswordStrength(name, dob, petName, password);
+            const specificInfoOutput = document.getElementById('specificInfoOutput');
+            specificInfoOutput.classList.remove('hidden');
+            specificInfoOutput.textContent = containsPersonalInfo ? 'Password contains personal information!' : 'Password is safe from personal information.';
+            specificInfoOutput.className = `strength ${containsPersonalInfo ? 'weak' : 'strong'}`;
+        });
+
+        document.getElementById('strengthTab').addEventListener('click', function() {
+            document.getElementById('strengthContainer').classList.remove('hidden');
+            document.getElementById('customStrengthContainer').classList.add('hidden');
+            this.classList.add('active');
+            document.getElementById('customStrengthTab').classList.remove('active');
+        });
+
+        document.getElementById('customStrengthTab').addEventListener('click', function() {
+            document.getElementById('customStrengthContainer').classList.remove('hidden');
+            document.getElementById('strengthContainer').classList.add('hidden');
+            this.class .add('active');
+            document.getElementById('strengthTab').classList.remove('active');
+        });
+    </script>
+</body>
+</html>

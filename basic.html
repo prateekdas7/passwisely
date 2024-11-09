@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassWisely</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .strength {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .weak {
+            color: red;
+        }
+        .medium {
+            color: orange;
+        }
+        .strong {
+            color: green;
+        }
+        #passwordInput {
+            padding: 10px;
+            width: 300px;
+        }
+        #checkStrength {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .tips {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<h1>PassWisely</h1>
+<input type="password" id="passwordInput" placeholder="Enter your password">
+<button id="checkStrength">Check Strength</button>
+<div class="strength" id="strengthOutput"></div>
+
+<h2>Statistics About Weak Passwords</h2>
+<ul>
+    <li>Over 80% of data breaches are due to weak passwords.</li>
+    <li>Common passwords like "123456" and "password" are still widely used.</li>
+    <li>Using the same password across multiple sites increases risk.</li>
+</ul>
+
+<div class="tips">
+    <h2>Do's and Don'ts for Creating a Strong Password</h2>
+    <h3>Do's:</h3>
+    <ul>
+        <li>Use a mix of upper and lower case letters.</li>
+        <li>Include numbers and special characters.</li>
+        <li>Make it at least 12 characters long.</li>
+        <li>Use passphrases or a combination of words.</li>
+    </ul>
+    <h3>Don'ts:</h3>
+    <ul>
+        <li>Don't use easily guessable information (e.g., birthdays).</li>
+        <li>Don't use the same password for multiple accounts.</li>
+        <li>Don't use dictionary words or common phrases.</li>
+        <li>Don't share your password with anyone.</li>
+    </ul>
+</div>
+
+<script>
+    function checkPasswordStrength(password) {
+        let strength = 0;
+        if (password.length >= 12) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[\W_]/.test(password)) strength++;
+
+        return strength;
+    }
+
+    document.getElementById('checkStrength').addEventListener('click', function() {
+        const password = document.getElementById('passwordInput').value;
+        const strength = checkPasswordStrength(password);
+        const output = document.getElementById('strengthOutput');
+
+        if (strength < 2) {
+            output.textContent = 'Weak Password';
+            output.className = 'strength weak';
+        } else if (strength === 2 || strength === 3) {
+            output.textContent = 'Medium Password';
+            output.className = 'strength medium';
+        } else {
+            output.textContent = 'Strong Password';
+            output.className = 'strength strong';
+        }
+    });
+</script>
+
+</body>
+</html>
